@@ -18,7 +18,7 @@ public class ActivityUpdaterTest extends Page {
         EntityManagerFactory todo_app = Persistence.createEntityManagerFactory("todo_app");
         EntityManager entityManager = todo_app.createEntityManager();
         UserEntity userEntity = entityManager.find(UserEntity.class, 1L);
-        Set<ActivityEntity> userActivities = userEntity.getUserActivities();
+        List<ActivityEntity> userActivities = userEntity.getUserActivities();
 
         Map<Integer, ActivityEntity> enumeratedActivities = new HashMap<>();
         int k = 1;
@@ -40,6 +40,7 @@ public class ActivityUpdaterTest extends Page {
         System.out.println( "1 . open 2.done 3.progress");
         int i1 = new Scanner(System.in).nextInt();
 
+        assert selectedActivity != null;
         selectedActivity.setStatus(Status.Done);
 
         System.out.println(selectedActivity);
@@ -50,7 +51,7 @@ public class ActivityUpdaterTest extends Page {
         entityManager.getTransaction().commit();
 
         UserEntity userEntity2 = entityManager.find(UserEntity.class, 1L);
-        Set<ActivityEntity> userActivities2 = userEntity.getUserActivities();
+        List<ActivityEntity> userActivities2 = userEntity.getUserActivities();
 
         for (ActivityEntity activity : userActivities2)
 

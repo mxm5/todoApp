@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 public class ActivityEnumTest {
@@ -43,7 +44,7 @@ public class ActivityEnumTest {
 
 
         UserEntity user = manager.find(UserEntity.class, 1L);
-        Set<ActivityEntity> userActivities = user.getUserActivities();
+        List<ActivityEntity> userActivities = user.getUserActivities();
         for (ActivityEntity activity1 :userActivities)
             System.out.println(activity1);
     }

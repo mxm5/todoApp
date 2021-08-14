@@ -4,6 +4,8 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="todo_app">
+
+
         <class>entities.ActivityEntity</class>
         <class>entities.UserEntity</class>
 
@@ -21,9 +23,12 @@
             <property name="hibernate.show_sql" value="true"/>
             <!-- update db -->
             <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!-- hibernate URL for DB -->
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/todo_app"/>
+            <!-- hibernate Driver for DB database -->
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
-
         </properties>
+
+
     </persistence-unit>
 </persistence>

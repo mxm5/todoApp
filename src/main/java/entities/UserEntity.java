@@ -3,9 +3,7 @@ package entities;
 import entities.base.EntityModel;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 
@@ -21,7 +19,7 @@ public class UserEntity extends EntityModel {
     private String userPassword;
     @OneToMany(targetEntity = ActivityEntity.class)
     @JoinColumn(name = "user_id")
-    private Set<ActivityEntity> userActivities= new HashSet<>();
+    private List<ActivityEntity> userActivities= new ArrayList<>();
 
     public UserEntity() {
     }
@@ -91,11 +89,11 @@ public class UserEntity extends EntityModel {
         return Objects.hash(userId, fullName, userName, userPassword);
     }
 
-    public Set<ActivityEntity> getUserActivities() {
+    public List<ActivityEntity> getUserActivities() {
         return userActivities;
     }
 
-    public void setUserActivities(Set<ActivityEntity> userActivities) {
+    public void setUserActivities(List<ActivityEntity> userActivities) {
         this.userActivities = userActivities;
     }
 }
