@@ -1,10 +1,11 @@
 package entities;
 
 import entities.base.EntityModel;
+import entities.enums.Status;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
 
 
 @Entity
@@ -67,6 +68,22 @@ public class ActivityEntity extends EntityModel {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+
+    public String getActivityDueDateInFormat() {
+//        https://stackoverflow.com/questions/5121976/is-there-a-date-format-to-display-the-day-of-the-week-in-java
+        SimpleDateFormat sdfTime = new SimpleDateFormat("EEE dd MMM yyyy");
+//        sdfTime.setTimeZone(java.util.TimeZone.getTimeZone("GMT+4:30"));
+        try {
+            return sdfTime.format(activityDueDate);
+        }catch (Exception e){
+            return "no date assigned";
+        }
+    }
+
+
+
+
 
     @Override
     public String toString() {

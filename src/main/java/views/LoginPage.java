@@ -7,7 +7,12 @@ import views.Base.Page;
 
 public class LoginPage extends Page {
 
-    public static final UserService userService = new UserService(new UserRepository());
+
+    public LoginPage() {
+        run();
+    }
+
+    public static final UserService userService = new UserService();
 
     @Override
     protected void run() {
@@ -16,16 +21,18 @@ public class LoginPage extends Page {
 
         String password = enterValue("enter your password", 3);
 
-        UserEntity enteredUser = new UserEntity(username,password);
+        UserEntity enteredUser = new UserEntity(username, password);
 
         UserEntity login = userService.login(enteredUser);
 
 
         if (login != null) {
             success("login successful");
-            new HomePage(login);
-        }
-        else {
+
+            HomePage homePage = new HomePage(login);
+
+
+        } else {
             warning("wrong information");
             new WelcomePage();
         }

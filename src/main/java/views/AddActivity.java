@@ -2,16 +2,16 @@ package views;
 
 import entities.ActivityEntity;
 import entities.UserEntity;
-import repositories.UserRepository;
 import services.UserService;
 import views.Base.Page;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddActivity extends Page {
 
-    public static final UserService userService = new UserService(new UserRepository());
+    public static final UserService userService = new UserService();
 
 
     private UserEntity user;
@@ -27,11 +27,18 @@ public class AddActivity extends Page {
     }
 
     AddActivity(UserEntity user) {
-        super();
+
         this.user = user;
         setActivityDateToNow();
-        print(activityDueDate);
+//        print(activityDueDate);
 
+//        https://stackoverflow.com/questions/21796497/how-to-extract-date-and-time-from-a-string-timestamp-in-java
+//        from stack overflow
+        SimpleDateFormat sdfTime = new SimpleDateFormat("hh:mm a");
+        sdfTime.setTimeZone(java.util.TimeZone.getTimeZone("GMT+4:30"));
+        String dateStr = sdfTime.format(activityDueDate);
+        print("Tehran " + dateStr);
+        run();
     }
 
     @Override
@@ -40,16 +47,17 @@ public class AddActivity extends Page {
 
         activityNotes = enterLine("enter your Activity description");
 
+        line();
+
         ActivityEntity newActivityEntity = new ActivityEntity();
         newActivityEntity.setActivityName(activityName);
-
         newActivityEntity.setActivityNotes(activityNotes);
         newActivityEntity.setActivityDueDate(activityDueDate);
 
         boolean activity = userService.createActivity(newActivityEntity, user);
-        if(activity){
+        if (activity) {
             success("added activity");
-            new ShowAllActivityPage(user);
+            new ActivityListMenu(user);
         }
 
     }

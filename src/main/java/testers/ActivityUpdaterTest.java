@@ -1,15 +1,13 @@
 package testers;
 
 import entities.ActivityEntity;
-import entities.Status;
+import entities.enums.Status;
 import entities.UserEntity;
-import jdk.jshell.Snippet;
 import views.Base.Page;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.awt.desktop.SystemEventListener;
 import java.util.*;
 
 public class ActivityUpdaterTest extends Page {

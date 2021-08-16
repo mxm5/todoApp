@@ -1,16 +1,24 @@
 package views.Base;
 
+import entities.UserEntity;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
 public abstract class Page implements PageApi {
 
-    public Page() {
-
+    {
         printTitle();
-        run();
     }
+
+    public Page() {
+    }
+
+
+
+
+
 
     protected abstract void run();
 
@@ -47,8 +55,16 @@ public abstract class Page implements PageApi {
     }
 
     @Override
+    public void jump() {
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    @Override
     public String enterValue(String msg, int minimumLength) {
-        String val = "";
+        String val;
         System.out.print(msg + " > ");
         while (true) {
             val = new Scanner(System.in).next().strip();
@@ -63,7 +79,7 @@ public abstract class Page implements PageApi {
 
     @Override
     public String enterLine(String msg) {
-        String val = "";
+        String val;
         System.out.print(msg + " > ");
         val = new Scanner(System.in).nextLine();
         return val;
@@ -71,7 +87,7 @@ public abstract class Page implements PageApi {
 
     @Override
     public String enterValue(String msg) {
-        String val = "";
+        String val;
         System.out.print(msg + " > ");
         val = new Scanner(System.in).next();
         return val;
@@ -80,7 +96,7 @@ public abstract class Page implements PageApi {
     @Override
     public int selectOpt(int maxOpt) {
         print();
-        int opt = 0;
+        int opt;
         print("enter an option between 1 to " + maxOpt);
         while (true) {
             try {
@@ -100,19 +116,19 @@ public abstract class Page implements PageApi {
     @Override
     public <E> void printTitle(E value) {
         int l = value.toString().length();
-        boolean even = l%2==0;
-        int dist = 0;
-        if( even){
+        boolean even = l % 2 == 0;
+        int dist;
+        if (even) {
             int total = 96;
-             dist = (total - l)/2;
+            dist = (total - l) / 2;
         } else {
-            dist = (95-l)/2;
+            dist = (95 - l) / 2;
 
         }
 
         line();
         String k = " ";
-        System.out.println("||" + " ".repeat(dist) + value + " ".repeat(dist-1) + (even ? " " : "  ") + "||");
+        System.out.println("||" + " ".repeat(dist) + value + " ".repeat(dist - 1) + (even ? " " : "  ") + "||");
         print("||" + "_".repeat(96) + "||");
         print();
     }

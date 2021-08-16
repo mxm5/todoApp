@@ -10,6 +10,8 @@ public interface PageApi {
 
     void line();
 
+    void jump();
+
     String enterValue(String msg, int minimumLength);
 
     String enterLine(String msg );

@@ -8,8 +8,8 @@ import services.base.Service;
 
 public class UserService extends Service<UserEntity, UserRepository> {
     private ActivityRepository activityRepository;
-    public UserService(UserRepository repository) {
-        super(repository);
+    public UserService() {
+        super(new UserRepository());
         activityRepository = new ActivityRepository();
     }
 
@@ -21,8 +21,10 @@ public class UserService extends Service<UserEntity, UserRepository> {
 
     public boolean createActivity(ActivityEntity newActivity, UserEntity user){
         Boolean aBoolean = activityRepository.addNewActivity(newActivity);
+
         if(aBoolean) {
-             return repository.assignActivity(newActivity, user);
+
+            return repository.assignActivity(newActivity, user);
         }
         return false;
     }
