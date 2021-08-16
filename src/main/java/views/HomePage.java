@@ -21,7 +21,7 @@ public class HomePage extends Page {
         printOptions(List.of("show all my todos", "add new todo"));
         int opt = selectOpt(2);
         switch (opt) {
-            case 1 -> new ActivityListMenu(currentUser);
+            case 1 -> new ActivityManager(currentUser);
             case 2 -> new AddActivity(currentUser);
         }
     }

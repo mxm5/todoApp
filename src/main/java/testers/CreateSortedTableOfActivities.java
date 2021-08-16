@@ -24,16 +24,17 @@ public class CreateSortedTableOfActivities {
             int activityIndexer = 1;
 
 
-            System.out.println("+" + "-----" + ("+" + "-".repeat(33)).repeat(3) + "+");
-            System.out.printf("| %-4s|   %-30s|   %-30s|   %-30s|%n", "num", "title", "date", "status");
-            System.out.printf("| %-4s|   %-30s|   %-30s|   %-30s|%n", "", "", "", "");
-            System.out.println("+" + "-----" + ("+" + "-".repeat(33)).repeat(3) + "+");
+            System.out.println("+" + "-----" + ("+" + "-".repeat(33)).repeat(3) + "+"+"-".repeat(12)+"+");
+            System.out.printf("| %-4s|   %-30s|   %-30s|   %-30s|  %-10s|%n", "num", "title", "date","notes", "status");
+            System.out.printf("| %-4s|   %-30s|   %-30s|   %-30s|  %-10s|%n", "", "", "", "","");
+            System.out.println("+" + "-----" + ("+" + "-".repeat(33)).repeat(3) + "+"+"-".repeat(12)+"+");
 
 
             for (ActivityEntity act : userActivities) {
 
-                System.out.printf("| %-4d|   %-30s|   %-30s|   %-30s|%n", activityIndexer++, act.getActivityName(), act.getActivityDueDateInFormat(), act.getStatus());
-                System.out.println("+" + "-----" + ("+" + "-".repeat(33)).repeat(3) + "+");
+                System.out.printf("| %-4d|   %-30s|   %-30s|   %-30s|  %-10s|%n", activityIndexer++, act.getActivityName(), act.getActivityDueDateInFormat(),act.notesSummery() ,act.getStatus());
+                System.out.println("+" + "-----" + ("+" + "-".repeat(33)).repeat(3) + "+"+"-".repeat(12)+"+");
+
 
             }
 

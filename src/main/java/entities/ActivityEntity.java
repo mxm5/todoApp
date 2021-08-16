@@ -21,7 +21,7 @@ public class ActivityEntity extends EntityModel {
 
     private Timestamp activityDueDate;
 
-    @Column(length = 8, columnDefinition = "varchar(8) default 'Open'",nullable = false)
+    @Column(length = 8, columnDefinition = "varchar(8) default 'Open'", nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status = Status.Open;
 
@@ -76,13 +76,39 @@ public class ActivityEntity extends EntityModel {
 //        sdfTime.setTimeZone(java.util.TimeZone.getTimeZone("GMT+4:30"));
         try {
             return sdfTime.format(activityDueDate);
-        }catch (Exception e){
+        } catch (Exception e) {
             return "no date assigned";
         }
     }
 
 
+    public void printTableHead() {
+        System.out.println("+" + "-----" + ("+" + "-".repeat(33)).repeat(3) + "+" + "-".repeat(12) + "+");
+        System.out.printf("| %-4s|   %-30s|   %-30s|   %-30s|  %-10s|%n", "num", "title", "date", "notes", "status");
+        System.out.printf("| %-4s|   %-30s|   %-30s|   %-30s|  %-10s|%n", "", "", "", "", "");
+        System.out.println("+" + "-----" + ("+" + "-".repeat(33)).repeat(3) + "+" + "-".repeat(12) + "+");
+    }
 
+
+    public String notesSummery() {
+        if (activityNotes.length() > 27)
+            return activityNotes.substring(0, 27) + "...";
+        return activityNotes;
+
+    }
+    public String nameSummery() {
+        if (activityName.length() > 27)
+            return activityNotes.substring(0, 27) + "...";
+        return activityNotes;
+
+    }
+
+
+    public void printAsTableRow(int activityIndexer) {
+        System.out.printf("| %-4d|   %-30s|   %-30s|   %-30s|  %-10s|%n", activityIndexer, nameSummery(), getActivityDueDateInFormat(), notesSummery(), getStatus());
+        System.out.println("+" + "-----" + ("+" + "-".repeat(33)).repeat(3) + "+" + "-".repeat(12) + "+");
+
+    }
 
 
     @Override

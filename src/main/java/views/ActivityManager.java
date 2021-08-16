@@ -8,10 +8,10 @@ import views.Base.Page;
 
 import java.util.List;
 
-public class ActivityListMenu extends Page {
+public class ActivityManager extends Page {
     private UserEntity user;
 
-    public ActivityListMenu(UserEntity currentUser) {
+    public ActivityManager(UserEntity currentUser) {
         user = currentUser;
         run();
     }
@@ -39,19 +39,47 @@ public class ActivityListMenu extends Page {
         List<String> actionsList = List.of(
                 "edit activity status",
                 "show Activities sorted",
+                "add another activity",
+                "delete an activity",
                 "logout");
 
         printOptions(actionsList);
 
 
-        int opt = selectOpt(1);
+        int opt = selectOpt(4);
         switch (opt) {
             case 1 -> editActivityStatus(activityService, userActivities);
             case 2 -> new SortActivities(user);
-            case 3 -> new LoginPage();
+            case 3 -> new AddActivity(user);
+            case 4 -> deleteActivity(activityService, userActivities);
+            case 5 -> new WelcomePage();
         }
         run();
 
+    }
+
+    private void deleteActivity(ActivityService activityService, List<ActivityEntity> userActivities) {
+        line();
+        print("select an activity to edit its status ");
+        int opt = selectOpt(userActivities.size());
+        ActivityEntity remove = userActivities.get(opt - 1);
+
+        line();
+        print(" you selected the activity");
+        print("\t\t\tnumber   : " + opt);
+        print("\t\t\ttitle  : " + remove.getActivityName());
+        print("\t\t\tdate   : " + remove.getActivityDueDateInFormat());
+        print("\t\t\tstatus : " + remove.getStatus());
+        print("\t\t\tnotes  : " + remove.getActivityNotes());
+        line();
+
+        printOptions(
+                List.of("Yes",
+                        "No"
+                ));
+        int confirmDelete = selectOpt(2);
+        if (confirmDelete == 1)
+            activityService.removeActivity(remove);
     }
 
     private boolean editActivityStatus(ActivityService activityService, List<ActivityEntity> userActivities) {
@@ -67,7 +95,7 @@ public class ActivityListMenu extends Page {
         print("\t\t\tdate   : " + edit.getActivityDueDateInFormat());
         print("\t\t\tstatus : " + edit.getStatus());
         print("\t\t\tnotes  : " + edit.getActivityNotes());
-
+        line();
 
         printOptions(
                 List.of("change status to open",

@@ -23,10 +23,10 @@ public abstract class Page implements PageApi {
     protected abstract void run();
 
     @Override
-    public int printOptions(Collection<String> options) {
+    public int printOptions(Collection options) {
         int k = 0;
-        for (String opt : options) {
-            System.out.println(++k + ". " + opt);
+        for (Object opt : options) {
+            System.out.println(++k + ". " + opt.toString());
         }
         return k;
     }

@@ -57,7 +57,7 @@ public class AddActivity extends Page {
         boolean activity = userService.createActivity(newActivityEntity, user);
         if (activity) {
             success("added activity");
-            new ActivityListMenu(user);
+            new ActivityManager(user);
         }
 
     }
